@@ -13,6 +13,7 @@ class ProviderBaseBehaviorBuilder extends OMBuilder
         $table = $this->getTable();
         $tableName = $table->getName();
         $className = $this->getClassname();
+        $package = $this->getPackage();
 
         $templatePath = $this->getTemplatePath();
 
@@ -55,18 +56,9 @@ class ProviderBaseBehaviorBuilder extends OMBuilder
         $script .= $text;
     }
 
-    public function getPackagePath()
+    public function getPackage()
     {
-        $packagePath = parent::getPackagePath();
-        $packagePath = $packagePath.'/om';
-
-        return $packagePath;
-    }
-
-    public function getRealPackagePath()
-    {
-        $packagePath = parent::getPackagePath();
-        return $packagePath;
+        return parent::getPackage().'.om';
     }
 
     public function getNamespace()
