@@ -1,5 +1,5 @@
 {
-    "name": "emiliomg/PropelProviderBehavior",
+    "name": "emiliomg/propel-provider-behavior",
     "description": "A Propel ORM behavior that adds non-static providers to fetch new query-objects, new models, peers and connections.",
     "keywords": ["propel", "propelorm", "behavior", "provider", "factory", "factories"],
     "authors": [
