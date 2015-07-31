@@ -18,7 +18,7 @@ Then, add the following configuration to your `build.properties` or `propel.ini`
 
     propel.behavior.providerBase.behavior: vendor.emiliomg.propel-provider-behavior.src.ProviderBaseBehavior.ProviderBaseBehavior
     propel.behavior.providerFassade.behavior: vendor.emiliomg.propel-provider-behavior.src.ProviderFassadeBehavior.ProviderFassadeBehavior
-    propel.behavior.default: providerBase, providerFassade
+    propel.behavior.default = providerBase, providerFassade
 
 The `propel.behavior.default` makes sure every one of your models uses this behavior.
 
