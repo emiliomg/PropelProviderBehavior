@@ -5,9 +5,6 @@
  * You can use Dependency Injection to inject this provider into services who need
  * '<?php echo $tableName; ?>'-queries or -models and fetch them via this provider.
  * There is no need to access the models or queries directly, since this provider can be mocked.
- *
- * @package propel.generator.<?php echo $package; ?>
-
  */
 abstract class <?php echo $className; ?>
 

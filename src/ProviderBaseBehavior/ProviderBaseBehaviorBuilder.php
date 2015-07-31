@@ -13,7 +13,6 @@ class ProviderBaseBehaviorBuilder extends OMBuilder
         $table = $this->getTable();
         $tableName = $table->getName();
         $className = $this->getClassname();
-        $package = $this->getPackage();
 
         $templatePath = $this->getTemplatePath();
 

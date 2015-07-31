@@ -35,7 +35,6 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
         $className = $this->getClassname();
         $baseClassName = 'Base'.$className;
         $nameSpace = $this->getNamespace();
-        $package = $this->getPackage();
 
         $this->declareClass($nameSpace.'\\om\\'.$baseClassName);
 
