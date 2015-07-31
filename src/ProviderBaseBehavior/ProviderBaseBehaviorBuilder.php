@@ -94,11 +94,11 @@ class ProviderBaseBehaviorBuilder extends OMBuilder
      */
     protected function getTemplatePath()
     {
-        if (!defined(BEHAVIOR_PROVIDER_BASE_TEMPLATE_PATH)) {
+        if (!defined('BEHAVIOR_PROVIDER_BASE_TEMPLATE_PATH')) {
             $r = new ReflectionObject($this);
             $dirname = dirname($r->getFileName());
             $templatePath = $dirname.'/templates/';
-            define(BEHAVIOR_PROVIDER_BASE_TEMPLATE_PATH, $templatePath);
+            define('BEHAVIOR_PROVIDER_BASE_TEMPLATE_PATH', $templatePath);
         }
 
         return BEHAVIOR_PROVIDER_BASE_TEMPLATE_PATH;
