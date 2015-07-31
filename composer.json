@@ -1,0 +1,18 @@
+{
+    "name": "emiliomg/PropelProviderBehavior",
+    "description": "A Propel ORM behavior that adds non-static providers to fetch new query-objects, new models, peers and connections.",
+    "keywords": ["propel", "propelorm", "behavior", "provider", "factory", "factories"],
+    "authors": [
+        {
+            "name": "Emilio Markgraf",
+            "email": "emilio.markgraf@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "propel/propel1": "~1.6"
+    }
+}
