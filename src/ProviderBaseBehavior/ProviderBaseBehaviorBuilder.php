@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class ProviderBaseBehaviorBuilder
+ *
+ * @author Emilio Markgraf <emilio.markgraf@gmail.com>
+ */
 class ProviderBaseBehaviorBuilder extends OMBuilder
 {
 
