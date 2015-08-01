@@ -26,7 +26,6 @@ class ProviderBehaviorTest extends \PHPUnit_Framework_TestCase
         <column name="first_name" type="VARCHAR" size="255" />
         <column name="last_name" type="VARCHAR" size="255" />
         <behavior name="providerBase" />
-        <behavior name="providerFassade" />
     </table>
 </database>
 EOF;
