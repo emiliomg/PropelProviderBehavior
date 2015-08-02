@@ -14,5 +14,8 @@
     "require": {
         "php": ">=5.3.3",
         "propel/propel1": "~1.6"
+    },
+    "require-dev": {
+        "emiliomg/debug": "^1.0"
     }
 }
