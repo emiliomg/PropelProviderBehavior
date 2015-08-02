@@ -15,6 +15,18 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
         $fassadePath = $this->getBuildProperty('phpDir');
         $fassadeClassPath = $fassadePath.'/'.$this->getClassFilePath();
 
+        if (defined('BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE')) {
+            $cache = (array) json_decode(file_get_contents(BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE), true);
+            if (JSON_ERROR_NONE == json_last_error()) {
+                $cache[] = array(
+                    'namespace' => $nameSpace,
+                    'modelName' => str_replace('Provider', '', $className),
+                    'providerNamespace' => $nameSpace.'\\'.$className
+                );
+                file_put_contents(BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE, json_encode($cache));
+            }
+        }
+
         if (file_exists($fassadeClassPath)) {
             // File already exists.
             // It is not possible to just stop the process here and continue with the next file,
