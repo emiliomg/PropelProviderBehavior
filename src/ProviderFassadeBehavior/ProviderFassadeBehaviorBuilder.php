@@ -10,28 +10,40 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
 
     public function build()
     {
+
         $className = $this->getClassname();
         $nameSpace = $this->getNamespace();
-        $fassadePath = $this->getBuildProperty('phpDir');
-        $fassadeClassPath = $fassadePath.'/'.$this->getClassFilePath();
+        $phpDir = $this->getBuildProperty('phpDir');
+        $fassadePath = $phpDir.DIRECTORY_SEPARATOR.$this->getClassFilePath();
+        $outputDir = $this->getBuildProperty('outputDir');
 
-        if (defined('BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE')) {
-            $cache = (array) json_decode(file_get_contents(BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE), true);
+        if (in_array($this->getBuildProperty('behaviorProviderCachefile'), array('true', 'on', 'yes', '1'))) {
+            $cacheFile = $outputDir.DIRECTORY_SEPARATOR.'providerCache.json';
+
+//            Check if a special constant has been defined - if not, this is the first run of
+//            and Provider build, so we need to clear the cache.
+            if(!defined('BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED') || true != BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED) {
+                unlink($cacheFile);
+                touch($cacheFile);
+                define('BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED', true);
+            }
+
+            $cache = (array) json_decode(file_get_contents($cacheFile), true);
             if (JSON_ERROR_NONE == json_last_error()) {
                 $cache[] = array(
                     'namespace' => $nameSpace,
                     'modelName' => str_replace('Provider', '', $className),
                     'providerNamespace' => $nameSpace.'\\'.$className
                 );
-                file_put_contents(BEHAVIOR_PROVIDER_FASSADE_CACHE_FILE, json_encode($cache));
+                file_put_contents($cacheFile, json_encode($cache));
             }
         }
 
-        if (file_exists($fassadeClassPath)) {
-            // File already exists.
+        if (file_exists($fassadePath)) {
+            // Fassade already exists.
             // It is not possible to just stop the process here and continue with the next file,
             // so we return the source string just as it is in the current file, so it does not get overwritten
-            $sourceString = file_get_contents($fassadeClassPath);
+            $sourceString = file_get_contents($fassadePath);
         } else {
             // Fassade does not exist yet, so we build it
             $sourceString = parent::build();
@@ -96,7 +108,7 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
         if (!defined('BEHAVIOR_PROVIDER_FASSADE_TEMPLATE_PATH')) {
             $r = new ReflectionObject($this);
             $dirname = dirname($r->getFileName());
-            $templatePath = $dirname.'/templates/';
+            $templatePath = $dirname.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR;
             define('BEHAVIOR_PROVIDER_FASSADE_TEMPLATE_PATH', $templatePath);
         }
 
