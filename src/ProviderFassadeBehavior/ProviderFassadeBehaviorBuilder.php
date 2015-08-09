@@ -10,15 +10,15 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
 
     public function build()
     {
-
-        $className = $this->getClassname();
-        $nameSpace = $this->getNamespace();
         $phpDir = $this->getBuildProperty('phpDir');
         $fassadePath = $phpDir.DIRECTORY_SEPARATOR.$this->getClassFilePath();
-        $outputDir = $this->getBuildProperty('outputDir');
 
         if (in_array($this->getBuildProperty('behaviorProviderCachefile'), array('true', 'on', 'yes', '1'))) {
+            $outputDir = $this->getBuildProperty('outputDir');
             $cacheFile = $outputDir.DIRECTORY_SEPARATOR.'providerCache.json';
+            $className = $this->getClassname();
+            $package = $this->getPackage();
+            $nameSpace = $this->getNamespace();
 
 //            Check if a special constant has been defined - if not, this is the first run of
 //            and Provider build, so we need to clear the cache.
@@ -31,9 +31,10 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
             $cache = (array) json_decode(file_get_contents($cacheFile), true);
             if (JSON_ERROR_NONE == json_last_error()) {
                 $cache[] = array(
+                    'package' => $package,
                     'namespace' => $nameSpace,
                     'modelName' => str_replace('Provider', '', $className),
-                    'providerNamespace' => $nameSpace.'\\'.$className
+                    'providerName' => $className
                 );
                 file_put_contents($cacheFile, json_encode($cache));
             }
