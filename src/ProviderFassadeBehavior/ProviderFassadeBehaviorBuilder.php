@@ -23,7 +23,9 @@ class ProviderFassadeBehaviorBuilder extends OMBuilder
 //            Check if a special constant has been defined - if not, this is the first run of
 //            and Provider build, so we need to clear the cache.
             if(!defined('BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED') || true != BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED) {
-                unlink($cacheFile);
+                if (file_exists($cacheFile)) {
+                    unlink($cacheFile);
+                }
                 touch($cacheFile);
                 define('BEHAVIOR_PROVIDER_FASSADE_CACHE_CLEARED', true);
             }
