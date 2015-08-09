@@ -1,5 +1,3 @@
-propel.behavior.provider.cachefile
-
 # Propel Provider Behavior
 
 A Propel ORM Behavior that provides you with Providers for Query/Model/Peer Objects.
