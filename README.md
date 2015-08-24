@@ -72,11 +72,14 @@ A sample output for a ficional `Author`-Model then looks like this:
         /**
          * Returns a new query instance.
          *
+         * @param     string $modelAlias The alias of a model in the query
+         * @param   AuthorQuery|Criteria $criteria Optional Criteria to build the query from
+         *
          * @return AuthorQuery
          */
-        public function getQuery()
+        public function getQuery($modelAlias = null, $criteria = null)
         {
-            $query = AuthorQuery::create();
+            $query = AuthorQuery::create($modelAlias, $criteria);
     
             return $query;
         }
